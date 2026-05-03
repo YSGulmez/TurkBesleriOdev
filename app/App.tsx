@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Slide } from "./components/Slide";
 import { HeroSlide } from "./components/slides/HeroSlide";
 import { VisionSlide } from "./components/slides/VisionSlide";
@@ -93,27 +93,15 @@ export default function App() {
       {/* Slides Container */}
       <div className="relative w-full h-full">
         <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={slides[currentSlideIndex].id}
-            custom={direction}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
-            onDragEnd={(_, { offset, velocity }) => {
-              const swipe = offset.x * velocity.x;
-              const swipeThreshold = 500; // Adjusted for better sensitivity on smart boards
-              if (swipe < -swipeThreshold) {
-                nextSlide();
-              } else if (swipe > swipeThreshold) {
-                prevSlide();
-              }
-            }}
-            className="absolute inset-0 w-full h-full"
+          <Slide 
+            key={slides[currentSlideIndex].id} 
+            isActive={true} 
+            direction={direction}
+            onSwipeLeft={nextSlide}
+            onSwipeRight={prevSlide}
           >
-            <Slide isActive={true} direction={direction}>
-              {React.createElement(slides[currentSlideIndex].component)}
-            </Slide>
-          </motion.div>
+            {React.createElement(slides[currentSlideIndex].component)}
+          </Slide>
         </AnimatePresence>
       </div>
 
