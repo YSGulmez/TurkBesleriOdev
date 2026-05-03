@@ -108,26 +108,28 @@ export const MediaSlide = () => {
                <div className="flex gap-4">
                  <button 
                     onClick={prevVideo}
-                    className="group flex items-center justify-center w-12 h-12 rounded-full bg-[#050000]/20 hover:bg-[#050000]/40 border border-white/20 transition-all duration-300"
+                    className="group flex items-center justify-center w-16 h-16 rounded-full bg-[#050000]/20 hover:bg-[#050000]/40 border border-white/20 active:scale-90 transition-all duration-300"
                     aria-label="Önceki Eser"
                  >
-                    <ChevronLeft size={20} className="text-white/70 group-hover:text-white" />
+                    <ChevronLeft size={28} className="text-white/70 group-hover:text-white" />
                  </button>
                  <button 
                     onClick={nextVideo}
-                    className="group flex items-center justify-center w-12 h-12 rounded-full bg-red-600/20 hover:bg-red-600/40 border border-red-500/30 transition-all duration-300"
+                    className="group flex items-center justify-center w-16 h-16 rounded-full bg-red-600/20 hover:bg-red-600/40 border border-red-500/30 active:scale-90 transition-all duration-300"
                     aria-label="Sonraki Eser"
                  >
-                    <ChevronRight size={20} className="text-red-400 group-hover:text-red-300" />
+                    <ChevronRight size={28} className="text-red-400 group-hover:text-red-300" />
                  </button>
                </div>
                
                {/* Indicator Dots - Moved inside footer */}
-               <div className="flex gap-2">
+               <div className="flex gap-3">
                    {videos.map((_, idx) => (
-                       <div 
+                       <button 
                          key={idx} 
-                         className={`h-1 rounded-full transition-all duration-500 ${idx === currentVideoIndex ? 'w-6 bg-red-500' : 'w-2 bg-white/20'}`}
+                         onClick={() => setCurrentVideoIndex(idx)}
+                         className={`h-2 rounded-full transition-all duration-500 ${idx === currentVideoIndex ? 'w-8 bg-red-500' : 'w-3 bg-white/20 hover:bg-white/40'}`}
+                         aria-label={`Video ${idx + 1}`}
                        />
                    ))}
                </div>

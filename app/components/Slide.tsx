@@ -58,7 +58,7 @@ export const Slide = ({ children, isActive, direction, onSwipeLeft, onSwipeRight
       className="absolute inset-0 w-full h-full flex flex-col items-center justify-center overflow-hidden bg-black cursor-grab active:cursor-grabbing"
       style={{ perspective: "2000px", touchAction: "none" }}
     >
-      <div className="w-full h-full pointer-events-none select-none">
+      <div className="w-full h-full">
         {children}
       </div>
     </motion.div>
