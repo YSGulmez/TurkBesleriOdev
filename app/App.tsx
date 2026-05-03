@@ -93,9 +93,27 @@ export default function App() {
       {/* Slides Container */}
       <div className="relative w-full h-full">
         <AnimatePresence initial={false} custom={direction}>
-          <Slide key={slides[currentSlideIndex].id} isActive={true} direction={direction}>
-            {React.createElement(slides[currentSlideIndex].component)}
-          </Slide>
+          <motion.div
+            key={slides[currentSlideIndex].id}
+            custom={direction}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, { offset, velocity }) => {
+              const swipe = offset.x * velocity.x;
+              const swipeThreshold = 500; // Adjusted for better sensitivity on smart boards
+              if (swipe < -swipeThreshold) {
+                nextSlide();
+              } else if (swipe > swipeThreshold) {
+                prevSlide();
+              }
+            }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <Slide isActive={true} direction={direction}>
+              {React.createElement(slides[currentSlideIndex].component)}
+            </Slide>
+          </motion.div>
         </AnimatePresence>
       </div>
 
@@ -103,13 +121,13 @@ export default function App() {
       <div className="absolute bottom-6 left-0 right-0 flex justify-center items-center gap-8 z-50 pointer-events-none">
         
         {/* Progress Dots */}
-        <div className="flex gap-2 pointer-events-auto bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-xl">
+        <div className="flex gap-4 pointer-events-auto bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 shadow-xl">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                index === currentSlideIndex ? "bg-red-600 w-6" : "bg-white/50 hover:bg-white/80"
+              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                index === currentSlideIndex ? "bg-red-600 w-10" : "bg-white/50 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -119,23 +137,23 @@ export default function App() {
       </div>
 
       {/* Side Navigation Arrows */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-4 z-50 pointer-events-auto">
+      <div className="absolute top-1/2 -translate-y-1/2 left-6 z-50 pointer-events-auto">
         <button 
           onClick={prevSlide}
           disabled={currentSlideIndex === 0}
-          className={`p-3 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 transition-all ${currentSlideIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-black/40 hover:scale-110'}`}
+          className={`p-6 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 transition-all ${currentSlideIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-black/40 hover:scale-110 active:scale-95'}`}
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft size={32} />
         </button>
       </div>
 
-      <div className="absolute top-1/2 -translate-y-1/2 right-4 z-50 pointer-events-auto">
+      <div className="absolute top-1/2 -translate-y-1/2 right-6 z-50 pointer-events-auto">
         <button 
           onClick={nextSlide}
           disabled={currentSlideIndex === slides.length - 1}
-          className={`p-3 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 transition-all ${currentSlideIndex === slides.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-black/40 hover:scale-110'}`}
+          className={`p-6 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 transition-all ${currentSlideIndex === slides.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-black/40 hover:scale-110 active:scale-95'}`}
         >
-          <ChevronRight size={24} />
+          <ChevronRight size={32} />
         </button>
       </div>
 
@@ -143,10 +161,10 @@ export default function App() {
       <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
         <button 
           onClick={toggleFullscreen}
-          className="p-3 rounded-xl bg-white/5 backdrop-blur-md text-white/50 border border-white/10 hover:bg-white/10 hover:text-white transition-all duration-300"
+          className="p-5 rounded-2xl bg-white/5 backdrop-blur-md text-white/50 border border-white/10 hover:bg-white/10 hover:text-white active:scale-95 transition-all duration-300"
           aria-label="Toggle Fullscreen"
         >
-          {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+          {isFullscreen ? <Minimize size={28} /> : <Maximize size={28} />}
         </button>
       </div>
 
