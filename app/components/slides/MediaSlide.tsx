@@ -31,8 +31,8 @@ const videos = [
   },
     {
     id: "XAYToESb1kA",
-    title: "Cemal Reşit Rey 'Lüküs Hayat' 3 Kasım 1992",
-    description: "Sezai Altekin, Suna Pekuysal ve  Zihni Göktay İBB  Kültür Sanat Arşiv’inden 3 Kasım 1992 Cemal Reşit Rey Konser Salonu"
+    title: "Özsoy Operası Cumuriyeti'in 101'inci Yılında Atatürk Kültür Merkezi'nde2",
+    description: "Atatürk Kültür Merkezi."
   }
 ];
 
