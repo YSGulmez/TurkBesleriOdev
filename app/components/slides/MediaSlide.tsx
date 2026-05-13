@@ -31,7 +31,7 @@ const videos = [
   },
     {
     id: "XAYToESb1kA",
-    title: "Özsoy Operası Cumuriyeti'in 101'inci Yılında Atatürk Kültür Merkezi'nde2",
+    title: "Özsoy Operası Cumuriyeti'in 101'inci Yılında Atatürk Kültür Merkezi'nde",
     description: "Atatürk Kültür Merkezi."
   }
 ];
