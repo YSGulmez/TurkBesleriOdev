@@ -28,6 +28,11 @@ const videos = [
     id: "Wr584mfTcGs",
     title: "Necil Kazim Akses Moderato ",
     description: "Concerto for orchestra, Conductor - Rengim Gökmen"
+  },
+    {
+    id: "XAYToESb1kA",
+    title: "Cemal Reşit Rey 'Lüküs Hayat' 3 Kasım 1992",
+    description: "Sezai Altekin, Suna Pekuysal ve  Zihni Göktay İBB  Kültür Sanat Arşiv’inden 3 Kasım 1992 Cemal Reşit Rey Konser Salonu"
   }
 ];
 
